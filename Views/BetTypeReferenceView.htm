@@ -1,0 +1,50 @@
+﻿<!--NoteSection-->
+<div class="note-box">
+    <div class="note">{static:Resources.BetTypeRefLang.Note}</div>
+    <div class="text-note">{static:Resources.BetTypeRefLang.NoteContent}</div>
+</div>
+<!--/NoteSection-->
+<div class="content">
+    <div class="title">{static:Resources.BetTypeRefLang.PTSettingInformation}</div>
+    <p>{static:Resources.BetTypeRefLang.PTSettingInformationContent}</p>
+    <!--SportSection-->
+    <div class="sport">
+        <div class="header-sport {FirstSportClass}" onclick="toggleSport(this);">
+            <span class="iconBox {CollapseExpandClass}"></span>{RefSportName}
+        </div>
+        <div class="{HideClass}">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="header bettypeCol">{static:Resources.BetTypeRefLang.Bettype}</th>
+                        <th class="header" colspan="2">{static:Resources.BetTypeRefLang.FollowedBy}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--BetSection-->
+                    <tr>
+                        <!--FirstRow-->
+                        <td class="bettype" rowspan="{NumOfBetType}">{RefBetTypeName}</td>
+                        <!--/FirstRow-->
+                        <td class="right followedByCol">{SportName}</td>
+                        <td class="left followedByCol">{BetTypeName}</td>
+                    </tr>
+                    <!--/BetSection-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--/SportSection-->
+</div>
+<script type="text/javascript" language="javascript">
+    function toggleSport(e) {
+        var t = e.nextSibling;
+        if (t.className.length === 0) {
+            t.className = "hide";
+            e.children[0].className = "iconBox collapse-icon"
+        } else {
+            t.className = "";
+            e.children[0].className = "iconBox expand-icon"
+        }
+    }
+</script>
