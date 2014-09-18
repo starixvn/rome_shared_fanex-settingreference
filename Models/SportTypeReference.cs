@@ -8,7 +8,7 @@
 // </history>
 // --------------------------------------------------------------------------
 
-namespace Fanex.PTSetting.BettypeReference.Models
+namespace Fanex.PTSetting.BettypeReference
 {
     using System.Collections.Generic;
 

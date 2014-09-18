@@ -9,7 +9,7 @@
 // </history>
 // --------------------------------------------------------------------------
 
-namespace Fanex.PTSetting.BettypeReference.Enums
+namespace Fanex.PTSetting.BettypeReference
 {
     /// <summary>
     /// Language code.

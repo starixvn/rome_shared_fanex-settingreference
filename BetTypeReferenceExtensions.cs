@@ -11,9 +11,6 @@
 namespace Fanex.PTSetting.BettypeReference
 {
     using System.Web.Mvc;
-    using Fanex.PTSetting.BettypeReference.Criteria;
-    using Fanex.PTSetting.BettypeReference.Enums;
-    using Fanex.PTSetting.BettypeReference.Services;
 
     /// <summary>
     /// PT Information Extensions.

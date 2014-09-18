@@ -8,17 +8,14 @@
 // </history>
 // --------------------------------------------------------------------------
 
-namespace Fanex.PTSetting.BettypeReference.Services
+namespace Fanex.PTSetting.BettypeReference
 {
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Threading;
     using System.Web;
-    using Fanex.Data.Repository;
-    using Fanex.PTSetting.BettypeReference.Criteria;
-    using Fanex.PTSetting.BettypeReference.Enums;
-    using Fanex.PTSetting.BettypeReference.Models;
+    using Fanex.Data;
     using Fanex.PTSetting.BettypeReference.Views;
 
     /// <summary>
@@ -27,7 +24,6 @@ namespace Fanex.PTSetting.BettypeReference.Services
     public class BetTypeReferenceService : IHtmlString
     {
         private readonly BetTypeReferenceCriteria _criteria;
-        private readonly DynamicRepository _dynamicRepository;
         private readonly LanguageCode _language;
 
         public BetTypeReferenceService(BetTypeReferenceCriteria criteria, LanguageCode language)
@@ -37,7 +33,6 @@ namespace Fanex.PTSetting.BettypeReference.Services
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
 
             _criteria = criteria;
-            _dynamicRepository = new DynamicRepository();
         }
 
         /// <summary>
@@ -142,7 +137,7 @@ namespace Fanex.PTSetting.BettypeReference.Services
             SportTypeReference refSporttype;
             IDictionary<int, SportTypeReference> refSporttypeHash = new Dictionary<int, SportTypeReference>();
 
-            var rawdata = _dynamicRepository.Fetch<RawBetTypeReference>(_criteria)
+            var rawdata = GetRawDataBetTypeReferences()
                 .GroupBy(r => new { r.SportTypeRef, r.BetTypeRef });
             foreach (var group in rawdata)
             {
@@ -174,6 +169,14 @@ namespace Fanex.PTSetting.BettypeReference.Services
             }
 
             return refSporttypeHash.Values.ToList();
+        }
+
+        private IEnumerable<RawBetTypeReference> GetRawDataBetTypeReferences()
+        {
+            using (var db = new ObjectDb(_criteria.GetSettingKey()))
+            {
+                return db.Query<RawBetTypeReference>(_criteria.GetSpParams());
+            }
         }
     }
 }

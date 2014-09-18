@@ -8,18 +8,18 @@
 // </history>
 // --------------------------------------------------------------------------
 
-namespace Fanex.PTSetting.BettypeReference.Models
+namespace Fanex.PTSetting.BettypeReference
 {
     /// <summary>
     /// Raw PT information.
     /// </summary>
     public class RawBetTypeReference
     {
-        public int SportType { get; set; }
+        public short SportType { get; set; }
 
         public int BetType { get; set; }
 
-        public int SportTypeRef { get; set; }
+        public short SportTypeRef { get; set; }
 
         public int BetTypeRef { get; set; }
     }

@@ -8,26 +8,34 @@
 // </history>
 // --------------------------------------------------------------------------
 
-namespace Fanex.PTSetting.BettypeReference.Criteria
+namespace Fanex.PTSetting.BettypeReference
 {
-    using Fanex.Data.Repository;
+    using System.Collections;
 
     /// <summary>
     /// PT Information Criteria.
     /// </summary>
-    public class BetTypeReferenceCriteria : CriteriaBase
+    public class BetTypeReferenceCriteria
     {
-        [SpParam(SqlParamName = "CustId")]
         public int CustomerId { get; set; }
 
         public int RoleId { get; set; }
 
-        public override string GetSettingKey()
+        public string GetSettingKey()
         {
             return "PositionTaking_RefSportTypeAndBetType";
         }
 
-        public override bool IsValid()
+        public Hashtable GetSpParams()
+        {
+            return new Hashtable 
+            {
+                { "CustId", CustomerId },
+                { "RoleId", RoleId }
+            };
+        }
+
+        public bool IsValid()
         {
             return CustomerId >= 0;
         }

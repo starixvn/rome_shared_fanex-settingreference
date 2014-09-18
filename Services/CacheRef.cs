@@ -8,10 +8,9 @@
 // </history>
 // --------------------------------------------------------------------------
 
-namespace Fanex.PTSetting.BettypeReference.Services
+namespace Fanex.PTSetting.BettypeReference
 {
     using System.Globalization;
-    using Fanex.PTSetting.BettypeReference.Enums;
     using RemotingRef;
 
     /// <summary>
