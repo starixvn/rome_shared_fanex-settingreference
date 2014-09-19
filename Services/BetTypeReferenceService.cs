@@ -46,7 +46,7 @@ namespace Fanex.PTSetting.BettypeReference
             BetTypeReferenceView_Template tpl = new BetTypeReferenceView_Template();
             tpl.SportSection.Clear();
 
-            var refSports = GetBetTypeReferences();
+            var refSports = GetBetTypeReferences().ToList();
             int refSportCount = refSports == null ? 0 : refSports.Count;
             for (int i = 0; i < refSportCount; i++)
             {
@@ -130,7 +130,7 @@ namespace Fanex.PTSetting.BettypeReference
         /// <returns>
         /// The list of Sport object.
         /// </returns>
-        private IList<SportTypeReference> GetBetTypeReferences()
+        private IEnumerable<SportTypeReference> GetBetTypeReferences()
         {
             int refSportId;
             BetTypeRef refBettype;
@@ -168,7 +168,7 @@ namespace Fanex.PTSetting.BettypeReference
                 refSporttype.RefBetTypes.Add(refBettype);
             }
 
-            return refSporttypeHash.Values.ToList();
+            return refSporttypeHash.Values;
         }
 
         private IEnumerable<RawBetTypeReference> GetRawDataBetTypeReferences()

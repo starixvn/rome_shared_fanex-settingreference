@@ -21,6 +21,8 @@ namespace Fanex.PTSetting.BettypeReference
 
         public int RoleId { get; set; }
 
+        public bool IsShowAll { get; set; }
+
         public string GetSettingKey()
         {
             return "PositionTaking_RefSportTypeAndBetType";
@@ -31,7 +33,8 @@ namespace Fanex.PTSetting.BettypeReference
             return new Hashtable 
             {
                 { "CustId", CustomerId },
-                { "RoleId", RoleId }
+                { "RoleId", RoleId },
+                { "IsShowAll", IsShowAll }
             };
         }
 

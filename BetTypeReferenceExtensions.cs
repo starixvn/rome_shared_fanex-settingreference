@@ -23,16 +23,38 @@ namespace Fanex.PTSetting.BettypeReference
         /// <param name="htmlHelper">Html helper object.</param>
         /// <param name="customerId">User ID logged in.</param>
         /// <param name="roleId">Role Id of user logged in.</param>
+        /// <param name="isShowAll">If set to <c>true</c> [is show all]:<para></para>
+        /// UAT = true.<para></para>
+        /// PROD = false.
+        /// </param>
         /// <param name="language">The language code.</param>
-        /// <returns>The html string.</returns>
+        /// <returns>
+        /// The html string.
+        /// </returns>
         public static BetTypeReferenceService RenderBetTypeReference(
             this HtmlHelper htmlHelper,
-            int customerId = 0,
-            int roleId = 0,
-            LanguageCode language = LanguageCode.English)
+            int customerId,
+            int roleId,
+            bool isShowAll,
+            LanguageCode language)
         {
-            BetTypeReferenceCriteria criteria = new BetTypeReferenceCriteria { CustomerId = customerId, RoleId = roleId };
+            BetTypeReferenceCriteria criteria = new BetTypeReferenceCriteria { CustomerId = customerId, RoleId = roleId, IsShowAll = isShowAll };
             return new BetTypeReferenceService(criteria, language);
+        }
+
+        /// <summary>
+        /// Renders the bet type reference.
+        /// </summary>
+        /// <param name="htmlHelper">The HTML helper.</param>
+        /// <param name="isShowAll">If set to <c>true</c> [is show all]:<para></para>
+        /// UAT = true.<para></para>
+        /// PROD = false.
+        /// </param>
+        /// <returns>The html string.</returns>
+        public static BetTypeReferenceService RenderBetTypeReference(this HtmlHelper htmlHelper, bool isShowAll)
+        {
+            BetTypeReferenceCriteria criteria = new BetTypeReferenceCriteria { IsShowAll = isShowAll };
+            return new BetTypeReferenceService(criteria, LanguageCode.English);
         }
     }
 }
