@@ -106,7 +106,7 @@ namespace Fanex.PTSetting.BettypeReference.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PT Setting of main bettypes are also applied to other bettypes as following:.
+        ///   Looks up a localized string similar to PT Settings of main bettypes are also applied to other bettypes as following:.
         /// </summary>
         public static string PTSettingInformationContent {
             get {

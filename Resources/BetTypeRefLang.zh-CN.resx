@@ -118,21 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Bettype" xml:space="preserve">
-    <value>Bettype</value>
+    <value>投注类别</value>
   </data>
   <data name="FollowedBy" xml:space="preserve">
-    <value>Followed By</value>
+    <value>遵循着</value>
   </data>
   <data name="Note" xml:space="preserve">
-    <value>Note</value>
+    <value>备注</value>
   </data>
   <data name="NoteContent" xml:space="preserve">
-    <value>This information is for reference only. It might become obsolete, please contact CSD for more information.</value>
+    <value>此信息仅供参考。可能会逾期，请联系客服部以了解更多詳情。</value>
   </data>
   <data name="PTSettingInformation" xml:space="preserve">
-    <value>PT Setting Information</value>
+    <value>占成设定信息</value>
   </data>
   <data name="PTSettingInformationContent" xml:space="preserve">
-    <value>PT Setting of main bettypes are also applied to other bettypes as following:</value>
+    <value>主要投注类别占成设定也适用于其它投注类别如下：</value>
   </data>
 </root>

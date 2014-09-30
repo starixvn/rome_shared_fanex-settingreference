@@ -32,9 +32,9 @@ namespace Fanex.PTSetting.BettypeReference
         {
             return new Hashtable 
             {
-                { "CustId", CustomerId },
-                { "RoleId", RoleId },
-                { "IsShowAll", IsShowAll }
+                { "custid", CustomerId },
+                { "roleid", RoleId },
+                { "isshowall", IsShowAll }
             };
         }
 
