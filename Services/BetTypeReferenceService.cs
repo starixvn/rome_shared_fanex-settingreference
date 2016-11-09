@@ -25,14 +25,19 @@ namespace Fanex.PTSetting.BettypeReference
     {
         private readonly BetTypeReferenceCriteria _criteria;
         private readonly LanguageCode _language;
+        private readonly IEnumerable<int> _exclusiveRefSportIds;
 
-        public BetTypeReferenceService(BetTypeReferenceCriteria criteria, LanguageCode language)
+        public BetTypeReferenceService(
+            BetTypeReferenceCriteria criteria,
+            LanguageCode language,
+            IEnumerable<int> exclusiveRefSportIds = null)
         {
             _language = language;
             Thread.CurrentThread.CurrentCulture = new CultureInfo((int)_language);
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
 
             _criteria = criteria;
+            _exclusiveRefSportIds = exclusiveRefSportIds;
         }
 
         /// <summary>
@@ -46,9 +51,11 @@ namespace Fanex.PTSetting.BettypeReference
             BetTypeReferenceView_Template tpl = new BetTypeReferenceView_Template();
             tpl.SportSection.Clear();
 
-            var refSports = GetBetTypeReferences().ToList();
-            int refSportCount = refSports == null ? 0 : refSports.Count;
-            for (int i = 0; i < refSportCount; i++)
+            var refSports = GetBetTypeReferences()
+                .Where(s => _exclusiveRefSportIds == null || !_exclusiveRefSportIds.Contains(s.RefSportId))
+                .ToList();
+
+            for (int i = 0, refSportCount = refSports.Count; i < refSportCount; i++)
             {
                 tpl.SportSection.Append(BuildSport(refSports[i], i == 0));
             }
@@ -70,6 +77,7 @@ namespace Fanex.PTSetting.BettypeReference
             sportSection.BetSection.Clear();
 
             sportSection.RefSportName = refSport.RefSportName;
+
             if (firstSport)
             {
                 sportSection.FirstSportClass = "first-child";
@@ -102,9 +110,11 @@ namespace Fanex.PTSetting.BettypeReference
 
             var sporttypes = bettype.SportTypes;
             int sportCount = sporttypes == null ? 0 : sporttypes.Count;
+
             for (int i = 0; i < sportCount; i++)
             {
                 betSection = new BetTypeReferenceView_SportSection_BetSection_Block();
+
                 if (i == 0)
                 {
                     betSection.FirstRow.NumOfBetType = sportCount.ToString(CultureInfo.InvariantCulture);
@@ -139,6 +149,7 @@ namespace Fanex.PTSetting.BettypeReference
 
             var rawdata = GetRawDataBetTypeReferences()
                 .GroupBy(r => new { r.SportTypeRef, r.BetTypeRef });
+
             foreach (var group in rawdata)
             {
                 refBettype = new BetTypeRef
@@ -159,9 +170,15 @@ namespace Fanex.PTSetting.BettypeReference
                 }
 
                 refSportId = group.Key.SportTypeRef;
+
                 if (!refSporttypeHash.TryGetValue(refSportId, out refSporttype))
                 {
-                    refSporttype = new SportTypeReference { RefSportId = refSportId, RefSportName = CacheRef.GetSportName(refSportId, _language) };
+                    refSporttype = new SportTypeReference 
+                    { 
+                        RefSportId = refSportId,
+                        RefSportName = CacheRef.GetSportName(refSportId, _language)
+                    };
+
                     refSporttypeHash.Add(refSportId, refSporttype);   
                 }
 

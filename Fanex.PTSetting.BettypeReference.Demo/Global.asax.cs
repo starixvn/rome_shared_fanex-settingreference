@@ -15,7 +15,7 @@ namespace Fanex.PTSetting.BettypeReference.Demo
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
+            //Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
         }
     }
 }

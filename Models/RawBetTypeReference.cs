@@ -13,7 +13,7 @@ namespace Fanex.PTSetting.BettypeReference
     /// <summary>
     /// Raw PT information.
     /// </summary>
-    public class RawBetTypeReference
+    internal class RawBetTypeReference
     {
         public short SportType { get; set; }
 
