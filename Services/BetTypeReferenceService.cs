@@ -24,18 +24,12 @@ namespace Fanex.PTSetting.BettypeReference
     public class BetTypeReferenceService : IHtmlString
     {
         private readonly BetTypeReferenceCriteria _criteria;
-        private readonly LanguageCode _language;
         private readonly IEnumerable<int> _exclusiveRefSportIds;
 
         public BetTypeReferenceService(
             BetTypeReferenceCriteria criteria,
-            LanguageCode language,
             IEnumerable<int> exclusiveRefSportIds = null)
         {
-            _language = language;
-            Thread.CurrentThread.CurrentCulture = new CultureInfo((int)_language);
-            Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
-
             _criteria = criteria;
             _exclusiveRefSportIds = exclusiveRefSportIds;
         }
@@ -155,7 +149,7 @@ namespace Fanex.PTSetting.BettypeReference
                 refBettype = new BetTypeRef
                 {
                     RefBetTypeId = group.Key.BetTypeRef,
-                    RefBetTypeName = CacheRef.GetBettype(group.Key.BetTypeRef, _language)
+                    RefBetTypeName = CacheRef.GetBettype(group.Key.BetTypeRef)
                 };
 
                 foreach (var item in group)
@@ -163,9 +157,9 @@ namespace Fanex.PTSetting.BettypeReference
                     refBettype.SportTypes.Add(new SportType 
                     {
                         SportId = item.SportType,
-                        SportName = CacheRef.GetSportName(item.SportType, _language),
+                        SportName = CacheRef.GetSportName(item.SportType),
                         BetTypeId = item.BetType,
-                        BetTypeName = CacheRef.GetBettype(item.BetType, _language)
+                        BetTypeName = CacheRef.GetBettype(item.BetType)
                     });    
                 }
 
@@ -176,7 +170,7 @@ namespace Fanex.PTSetting.BettypeReference
                     refSporttype = new SportTypeReference 
                     { 
                         RefSportId = refSportId,
-                        RefSportName = CacheRef.GetSportName(refSportId, _language)
+                        RefSportName = CacheRef.GetSportName(refSportId)
                     };
 
                     refSporttypeHash.Add(refSportId, refSporttype);   

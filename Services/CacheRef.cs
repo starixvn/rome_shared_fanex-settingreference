@@ -12,41 +12,23 @@ namespace Fanex.PTSetting.BettypeReference
 {
     using System.Globalization;
     using RemotingRef;
+    using System.Threading;
 
     /// <summary>
     /// Cache to get Sport and Bet type name.
     /// </summary>
     internal static class CacheRef
     {
-        public static string GetSportName(int sportId, LanguageCode lang)
+        private readonly static IRemotingRefService remotingRefService = new RemotingRefService();
+
+        public static string GetSportName(int sportId)
         {
-            return RefData.GetSportName(sportId.ToString(CultureInfo.InvariantCulture), TWLang(lang));
+            return remotingRefService.GetSportName(sportId.ToString(CultureInfo.InvariantCulture), Thread.CurrentThread.CurrentCulture.Name);
         }
 
-        public static string GetBettype(int bettypeId, LanguageCode lang)
+        public static string GetBettype(int bettypeId)
         {
-            return RefData.GetBetTypeName(bettypeId.ToString(CultureInfo.InvariantCulture), TWLang(lang));
-        }
-
-        /// <summary>
-        /// Language code defined by TW team.
-        /// </summary>
-        /// <param name="lang">The current language of our system.</param>
-        /// <returns>
-        /// The language code.
-        /// </returns>
-        private static string TWLang(LanguageCode lang)
-        {
-            switch (lang)
-            {
-                case LanguageCode.English: return "en";
-                case LanguageCode.Taiwan: return "ch";
-                case LanguageCode.Chinese: return "cs";
-                case LanguageCode.Japanese: return "jp";
-                case LanguageCode.Thailand: return "th";
-                case LanguageCode.Vietnamese: return "vn";
-                default: return "en";
-            }
+            return remotingRefService.GetBetTypeName(bettypeId.ToString(CultureInfo.InvariantCulture), Thread.CurrentThread.CurrentCulture.Name);
         }
     }
 }

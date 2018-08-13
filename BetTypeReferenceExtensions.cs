@@ -21,20 +21,19 @@ namespace Fanex.PTSetting.BettypeReference
             this HtmlHelper htmlHelper,
             int customerId,
             int roleId,
-            bool isShowAll,
-            LanguageCode language)
+            bool isShowAll)
         {
-            return RenderBetTypeReference(htmlHelper, customerId, roleId, isShowAll, language, null);
+            return RenderBetTypeReference(htmlHelper, customerId, roleId, isShowAll, null);
         }
 
         public static BetTypeReferenceService RenderBetTypeReference(this HtmlHelper htmlHelper, bool isShowAll)
         {
-            return RenderBetTypeReference(htmlHelper, 0, 0, isShowAll, LanguageCode.English, null);
+            return RenderBetTypeReference(htmlHelper, 0, 0, isShowAll, null);
         }
 
         public static BetTypeReferenceService RenderBetTypeReference(this HtmlHelper htmlHelper, bool isShowAll, params int[] exclusiveRefSportIds)
         {
-            return RenderBetTypeReference(htmlHelper, 0, 0, isShowAll, LanguageCode.English, exclusiveRefSportIds);
+            return RenderBetTypeReference(htmlHelper, 0, 0, isShowAll, exclusiveRefSportIds);
         }
 
         private static BetTypeReferenceService RenderBetTypeReference(
@@ -42,7 +41,6 @@ namespace Fanex.PTSetting.BettypeReference
             int customerId,
             int roleId,
             bool isShowAll,
-            LanguageCode language,
             params int[] exclusiveRefSportIds)
         {
             BetTypeReferenceCriteria criteria = new BetTypeReferenceCriteria
@@ -52,7 +50,7 @@ namespace Fanex.PTSetting.BettypeReference
                 IsShowAll = isShowAll
             };
 
-            return new BetTypeReferenceService(criteria, language, exclusiveRefSportIds);
+            return new BetTypeReferenceService(criteria, exclusiveRefSportIds);
         }
     }
 }
