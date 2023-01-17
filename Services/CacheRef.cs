@@ -20,10 +20,22 @@ namespace Fanex.PTSetting.BettypeReference
     internal static class CacheRef
     {
         private readonly static IRemotingRefService remotingRefService = new RemotingRefService();
+        private const string SportRefId = "DummySport";
 
         public static string GetSportName(int sportId)
         {
-            return remotingRefService.GetSportName(sportId.ToString(CultureInfo.InvariantCulture), Thread.CurrentThread.CurrentCulture.Name);
+            var sportName = remotingRefService.GetSportName(sportId.ToString(CultureInfo.InvariantCulture), Thread.CurrentThread.CurrentCulture.Name);
+
+            if (string.IsNullOrWhiteSpace(sportName))
+            {
+                sportName = remotingRefService.GetResourceDataByRefIdAndResourceId(
+                    SportRefId,
+                    sportId.ToString(CultureInfo.InvariantCulture),
+                    Thread.CurrentThread.CurrentCulture.Name,
+                    string.Empty);
+            }
+
+            return sportName;
         }
 
         public static string GetBettype(int bettypeId)
