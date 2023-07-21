@@ -17,6 +17,10 @@ namespace Fanex.PTSetting.BettypeReference
     /// </summary>
     public class BetTypeReferenceCriteria
     {
+        public string SiteDBGroupIp { get; set; }
+
+        public int SiteDBGroupId { get; set; }
+
         public int CustomerId { get; set; }
 
         public int RoleId { get; set; }
@@ -24,13 +28,13 @@ namespace Fanex.PTSetting.BettypeReference
         public bool IsShowAll { get; set; }
 
         public string GetSettingKey()
-        {
-            return "PositionTaking_RefSportTypeAndBetType";
-        }
+            => SiteDBGroupId == 0 ?
+            "PositionTaking_RefSportTypeAndBetType" :
+            $"SiteDB{SiteDBGroupId}_PositionTaking_RefSportTypeAndBetType";
 
         public Hashtable GetSpParams()
         {
-            return new Hashtable 
+            return new Hashtable
             {
                 { "custid", CustomerId },
                 { "roleid", RoleId },
