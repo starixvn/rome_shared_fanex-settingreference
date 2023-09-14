@@ -157,6 +157,7 @@
     <Compile Include="Services\CacheRef.cs" />
     <Compile Include="Services\BetTypeReferenceService.cs" />
     <Compile Include="BetTypeReferenceExtensions.cs" />
+    <Compile Include="Services\ObjectDbExtensions.cs" />
     <Compile Include="Views\BetTypeReferenceView.htm.cs" />
   </ItemGroup>
   <ItemGroup />

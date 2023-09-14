@@ -21,19 +21,25 @@ namespace Fanex.PTSetting.BettypeReference
             this HtmlHelper htmlHelper,
             int customerId,
             int roleId,
-            bool isShowAll)
+            bool isShowAll,
+            string siteDBGroupIp,
+            int siteDBGroupId)
         {
-            return RenderBetTypeReference(htmlHelper, customerId, roleId, isShowAll, null);
+            return RenderBetTypeReference(htmlHelper, customerId, roleId, isShowAll, siteDBGroupIp, siteDBGroupId, null);
         }
 
         public static BetTypeReferenceService RenderBetTypeReference(this HtmlHelper htmlHelper, bool isShowAll)
         {
-            return RenderBetTypeReference(htmlHelper, 0, 0, isShowAll, null);
+            return RenderBetTypeReference(htmlHelper, 0, 0, isShowAll, string.Empty, 0, null);
         }
 
-        public static BetTypeReferenceService RenderBetTypeReference(this HtmlHelper htmlHelper, bool isShowAll, params int[] exclusiveRefSportIds)
+        public static BetTypeReferenceService RenderBetTypeReference(this HtmlHelper htmlHelper,
+            bool isShowAll,
+            string siteDBGroupIp,
+            int siteDBGroupId,
+            int[] exclusiveRefSportIds)
         {
-            return RenderBetTypeReference(htmlHelper, 0, 0, isShowAll, exclusiveRefSportIds);
+            return RenderBetTypeReference(htmlHelper, 0, 0, isShowAll, siteDBGroupIp, siteDBGroupId, exclusiveRefSportIds);
         }
 
         private static BetTypeReferenceService RenderBetTypeReference(
@@ -41,13 +47,17 @@ namespace Fanex.PTSetting.BettypeReference
             int customerId,
             int roleId,
             bool isShowAll,
+            string siteDBGroupIp,
+            int siteDBGroupId,
             params int[] exclusiveRefSportIds)
         {
             BetTypeReferenceCriteria criteria = new BetTypeReferenceCriteria
             {
                 CustomerId = customerId,
                 RoleId = roleId,
-                IsShowAll = isShowAll
+                IsShowAll = isShowAll,
+                SiteDBGroupId = siteDBGroupId,
+                SiteDBGroupIp = siteDBGroupIp
             };
 
             return new BetTypeReferenceService(criteria, exclusiveRefSportIds);

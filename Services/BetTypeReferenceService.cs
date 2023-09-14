@@ -10,13 +10,13 @@
 
 namespace Fanex.PTSetting.BettypeReference
 {
+    using Fanex.Data;
+    using Fanex.PTSetting.BettypeReference.Services;
+    using Fanex.PTSetting.BettypeReference.Views;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
-    using System.Threading;
     using System.Web;
-    using Fanex.Data;
-    using Fanex.PTSetting.BettypeReference.Views;
 
     /// <summary>
     /// PT Information Service.
@@ -186,7 +186,7 @@ namespace Fanex.PTSetting.BettypeReference
         {
             using (var db = new ObjectDb(_criteria.GetSettingKey()))
             {
-                return db.Query<RawBetTypeReference>(_criteria.GetSpParams());
+                return db.QueryOnSiteDB<RawBetTypeReference>(_criteria.GetSpParams(), _criteria.SiteDBGroupIp);
             }
         }
     }
