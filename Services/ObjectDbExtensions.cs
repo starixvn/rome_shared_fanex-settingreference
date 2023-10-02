@@ -10,12 +10,11 @@ namespace Fanex.PTSetting.BettypeReference.Services
         public static IEnumerable<T> QueryOnSiteDB<T>(this ObjectDb objdb, Hashtable parameters, string dbServer)
         {
             string oldConnectionString = objdb.DbSetting.ConnectionString;
-            objdb.DbSetting.ConnectionString = BuildConnectionString(dbServer, oldConnectionString);
-            objdb.AssignParamValues(parameters);
+            objdb.DbSetting.ConnectionString = BuildConnectionString(dbServer, oldConnectionString);            
             
             try
             {
-                return objdb.Query<T>();
+                return objdb.Query<T>(parameters);
             }
             finally
             {
